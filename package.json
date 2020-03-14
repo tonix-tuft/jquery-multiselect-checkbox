@@ -1,0 +1,68 @@
+{
+  "name": "jquery-multiselect-checkbox",
+  "version": "1.0.0",
+  "description": "A jQuery plugin which enables multiple selection for checkbox inputs as well as other DOM elements.",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "multiselect",
+    "checkbox",
+    "jquery-plugin",
+    "ecosystem:jquery"
+  ],
+  "author": "Anton Bagdatyev (Tonix-Tuft)",
+  "license": "MIT",
+  "main": "dist/jquery-multiselect-checkbox.js",
+  "module": "dist/es6/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tonix-tuft/jquery-multiselect-checkbox.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "WEBPACK_ENV=watch webpack --progress --colors --watch",
+    "dev-build": "WEBPACK_ENV=watch webpack --progress --colors",
+    "build": "WEBPACK_ENV=build webpack",
+    "publish-git": "npm publish && git push && git push --tags",
+    "build-all": "npm run build && npm run dev-build && npm run build-module",
+    "publish-patch": "npm run build-all && npm version patch && npm run publish-git",
+    "publish-minor": "npm run build-all && npm version minor && npm run publish-git",
+    "publish-major": "npm run build-all && npm version major && npm run publish-git",
+    "build-module": "cross-env BABEL_ENV=module ./node_modules/.bin/babel ./src --out-dir ./dist/es6 --source-maps --copy-files"
+  },
+  "peerDependencies": {
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
+    "serialize-javascript": "^2.1.2",
+    "terser-webpack-plugin": "^1.4.3",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "jquery": "^3.4.1",
+    "@types/jquery": "^3.3.33"
+  },
+  "bugs": {
+    "url": "https://github.com/tonix-tuft/jquery-multiselect-checkbox/issues"
+  },
+  "homepage": "https://github.com/tonix-tuft/jquery-multiselect-checkbox#readme",
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "regenerator-runtime": "^0.13.3"
+  },
+  "files": [
+    "dist",
+    "src"
+  ]
+}
