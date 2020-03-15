@@ -27,7 +27,13 @@ module.exports = {
     "no-unused-vars": ["error", { ignoreRestSiblings: true }],
     "no-console": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-unused-vars": "off"
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-this-alias": [
+      "error",
+      {
+        allowedNames: ["self"] // Allow `const self = this`; `[]` by default
+      }
+    ]
   },
   overrides: [
     {

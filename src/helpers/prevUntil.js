@@ -23,31 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import checkboxResolveFactory from "./defaults/checkboxResolve";
-import itemResolve from "./defaults/itemResolve";
-import targetCheckStopPropagation from "./defaults/targetCheckStopPropagation";
-import nextUntilFlattenDOM from "./defaults/nextUntilFlattenDOM";
-import prevUntilFlattenDOM from "./defaults/prevUntilFlattenDOM";
-
 // eslint-disable-next-line no-unused-vars
-export default ($, window, document) => ({
-  checkboxes: null,
-  sync: null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onAllChecked: () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onAllUnchecked: () => {},
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onNotAllChecked: () => {},
-  checkboxResolve: checkboxResolveFactory($),
-  itemResolve: itemResolve,
-  targetCheckStopPropagation: targetCheckStopPropagation,
-  eventsElement: document,
-  syncEvent: "click",
-  handleShiftForCheckbox: false,
-  usePrevUntilNextUntilForSync: true,
-  next: nextUntilFlattenDOM,
-  prev: prevUntilFlattenDOM,
-  checkedClassName: "jquery-multi-select-checkbox-checked",
-  checkedIdDataAttributeName: "jquery-multi-select-checkbox-checked-id"
-});
+export default function prevUntil($el, $prevSelected, $all) {
+  return $el.prevUntil($prevSelected);
+}

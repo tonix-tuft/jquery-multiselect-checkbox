@@ -24,16 +24,16 @@
  */
 
 import $ from "jquery";
-import jQueryMultiselectCheckbox from "./jQueryMultiselectCheckbox";
-import defaultOptions from "./defaultOptions";
+import jQueryMultiselectCheckboxFactory from "./jQueryMultiselectCheckbox";
+import defaultOptionsFactory from "./defaultOptions";
 
 /**
- * @typeof {string}
+ * @type {string}
  */
 const JQUERY_PLUGIN_NAMESPACE = "multiselectCheckbox";
 
 /**
- * @typeof {Object}
+ * @type {Object}
  */
 const globalObject =
   typeof window !== "undefined"
@@ -43,12 +43,12 @@ const globalObject =
     : this;
 
 /**
- * @typeof {jQuery|undefined}
+ * @type {jQuery|undefined}
  */
 const package$ = ($ && $.fn && $) || void 0;
 
 /**
- * @typeof {jQuery|undefined}
+ * @type {jQuery|undefined}
  */
 const globalObject$ =
   (globalObject &&
@@ -59,13 +59,49 @@ const globalObject$ =
   void 0;
 
 /**
+ * @type {Function}
+ */
+const initPluginID = (() => {
+  let nextInitPluginID = 0;
+  return $ => {
+    if (!$.fn.multiselectCheckboxInitPluginID) {
+      nextInitPluginID++;
+      $.fn.multiselectCheckboxInitPluginID = nextInitPluginID;
+    }
+    return $.fn.multiselectCheckboxInitPluginID;
+  };
+})();
+
+/**
+ * @type {Object}
+ */
+const pluginIDMap = {};
+
+/**
  * Initializes the plugin.
  *
- * @param {jQuery} $ jQuery object.
+ * @param {jQuery} $ jQuery.
  * @return {undefined}
  */
 export default function initPlugin($) {
   const anotherPlugin = $.fn.multiselectCheckbox;
+  const anotherInitPluginID = $.fn.multiselectCheckboxInitPluginID;
+  const pluginID = initPluginID($);
+  pluginIDMap[pluginID] = pluginIDMap[pluginID]
+    ? pluginIDMap[pluginID]
+    : {
+        defaultOptions: defaultOptionsFactory(
+          $,
+          globalObject,
+          globalObject.document
+        ),
+        jQueryMultiselectCheckbox: jQueryMultiselectCheckboxFactory(
+          $,
+          globalObject,
+          globalObject.document
+        )
+      };
+  const { defaultOptions, jQueryMultiselectCheckbox } = pluginIDMap[pluginID];
   $.fn.multiselectCheckbox = function multiselectCheckbox(option, ...args) {
     let result;
     this.each((_, element) => {
@@ -85,39 +121,37 @@ export default function initPlugin($) {
           $.isPlainObject(option) && option
         );
 
-        plugin = new jQueryMultiselectCheckbox(
-          element,
-          options,
-          globalObject,
-          globalObject.document
-        );
+        plugin = new jQueryMultiselectCheckbox(element, options);
         $element.data(JQUERY_PLUGIN_NAMESPACE, plugin);
       }
 
       if (typeof option === "string") {
         const fn = plugin[option];
-
         if (typeof fn === "function") {
           result = fn.apply(plugin, args);
 
           if (result === plugin) {
             result = void 0;
           }
-
-          if (isDestroy) {
-            $element.removeData(JQUERY_PLUGIN_NAMESPACE);
-          }
+        }
+        if (isDestroy) {
+          $element.removeData(JQUERY_PLUGIN_NAMESPACE);
         }
       }
     });
     return typeof result !== "undefined" ? result : this;
   };
   $.fn.multiselectCheckbox.Constructor = jQueryMultiselectCheckbox;
-  $.fn.multiselectCheckbox.setDefaults = function setDefaults(options) {
+  $.fn.multiselectCheckbox.setDefaults = function setDefaults(optionsFactory) {
+    const options =
+      typeof optionsFactory === "function"
+        ? optionsFactory($, globalObject, globalObject.document)
+        : optionsFactory;
     $.extend(defaultOptions, $.isPlainObject(options) && options);
   };
   $.fn.multiselectCheckbox.noConflict = function noConflict() {
     $.fn.multiselectCheckbox = anotherPlugin;
+    $.fn.multiselectCheckboxInitPluginID = anotherInitPluginID;
     return $.fn.multiselectCheckbox;
   };
 }
