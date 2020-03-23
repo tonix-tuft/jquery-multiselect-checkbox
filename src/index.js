@@ -48,17 +48,6 @@ const globalObject =
 const package$ = ($ && $.fn && $) || void 0;
 
 /**
- * @type {jQuery|undefined}
- */
-const globalObject$ =
-  (globalObject &&
-    ((globalObject.$ && globalObject.$.fn && globalObject.$) ||
-      (globalObject.jQuery &&
-        globalObject.jQuery.fn &&
-        globalObject.jQuery))) ||
-  void 0;
-
-/**
  * @type {Function}
  */
 const initPluginID = (() => {
@@ -156,9 +145,4 @@ export default function initPlugin($) {
   };
 }
 
-(function() {
-  package$ && initPlugin(package$);
-  if (globalObject$ && globalObject$ !== package$) {
-    initPlugin(globalObject$);
-  }
-})();
+package$ && initPlugin(package$);

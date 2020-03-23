@@ -16,49 +16,47 @@ if (env === "build") {
 
 var config = {
   entry: __dirname + "/src/" + srcEntryPoint,
-  externals: {
-    jquery: "jQuery"
-  },
   devtool: "source-map",
   output: {
     path: path.resolve(__dirname, "./dist"),
     filename: outputFile,
     library: library,
     libraryTarget: "umd",
-    globalObject: `(typeof self !== 'undefined' ? self : this)`,
+    globalObject:
+      "(typeof self !== 'undefined' ? self : (typeof global !== 'undefined' ? global : this))",
     umdNamedDefine: true,
     libraryExport: "default"
+  },
+  externals: {
+    jquery: {
+      commonjs: "jquery",
+      commonjs2: "jquery",
+      amd: "jquery",
+      root: "jQuery"
+    }
   },
   module: {
     rules: [
       {
         test: /(\.jsx|\.js)$/,
-        exclude: [
-          /(node_modules|bower_components)/,
-          /\bcore-js\b/,
-          /\bwebpack\/buildin\b/
-        ],
+        exclude: /(node_modules|bower_components)/,
         loader: "babel-loader",
         options: {
-          babelrc: false,
-          sourceType: "unambiguous",
           presets: [
-            [
-              "@babel/preset-env",
-              {
-                // Webpack supports ES Modules out of the box and therefore doesn’t require
-                // import/export to be transpiled resulting in smaller builds, and better tree
-                // shaking. See https://webpack.js.org/guides/tree-shaking/#conclusion
-                modules: false,
-                // Adds specific imports for polyfills when they are used in each file.
-                // Take advantage of the fact that a bundler will load the polyfill only once.
-                useBuiltIns: "usage",
-                corejs: {
-                  version: "3",
-                  proposals: true
-                }
-              }
-            ]
+            "@babel/preset-env",
+            {
+              plugins: [
+                "@babel/plugin-proposal-object-rest-spread",
+                "@babel/plugin-proposal-class-properties"
+                // , [
+                //   "@babel/plugin-transform-runtime",
+                //   {
+                //     "corejs": false,
+                //     "regenerator": true
+                //   }
+                // ]
+              ]
+            }
           ]
         }
       },
