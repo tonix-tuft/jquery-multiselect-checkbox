@@ -27,7 +27,8 @@ import ImmutableLinkedOrderedMap from "immutable-linked-ordered-map";
 import checkUncheck from "./helpers/checkUncheck";
 import emptyArrayIfNull from "./helpers/emptyArrayIfNull";
 import checkForCheckboxAll from "./helpers/checkForCheckboxAll";
-import toggle from "./helpers/toggle";
+import handleShift from "./helpers/handleShift";
+import setSelectedUniqueId from "./helpers/setSelectedUniqueId";
 
 // eslint-disable-next-line no-unused-vars
 export default ($, window, document) =>
@@ -153,8 +154,8 @@ export default ($, window, document) =>
       const toToggle =
         targetCheck || isCtrl || isShift || this.options.syncEvenWithoutCtrl;
       if (toToggle) {
-        toggle.call(this, $, $checkbox, void 0);
-        toggle.call(this, $, $item, void 0, isShift);
+        this.toggle($, $checkbox, void 0);
+        this.toggle($, $item, void 0, isShift);
       }
       checkForCheckboxAll.call(this, $, toToggle);
     }
@@ -164,10 +165,10 @@ export default ($, window, document) =>
       const checked = $this.prop("checked");
       const self = this;
       $(this.options.checkboxes).each(function() {
-        toggle.call(self, $, $(this), checked);
+        self.toggle($, $(this), checked);
       });
       $(this.options.sync).each(function() {
-        toggle.call(self, $, $(this), checked);
+        self.toggle($, $(this), checked);
       });
 
       if (!checked) {
@@ -176,6 +177,41 @@ export default ($, window, document) =>
         this.options.onAllUnchecked();
       } else {
         this.options.onAllChecked();
+      }
+    }
+
+    toggle($, $el, force, isShift) {
+      if ($el.hasClass(this.options.checkedClassName)) {
+        if (force !== true) {
+          $el.removeClass(this.options.checkedClassName);
+          if ($el.is(this.options.checkboxes)) {
+            $el.prop("checked", false);
+            const itemId = $el.data(this.options.checkedIdDataAttributeName);
+            if (this.selectedMap.get(itemId)) {
+              this.selectedMap = this.selectedMap.unset(itemId);
+            }
+          }
+        }
+      } else {
+        if (force === true || typeof force === "undefined") {
+          $el.addClass(this.options.checkedClassName);
+          if ($el.is(this.options.checkboxes)) {
+            $el.prop("checked", true);
+            setSelectedUniqueId.call(this, $el);
+          }
+          this.$beforeLastSelected = this.$lastSelected;
+          this.$lastSelected = $el;
+        }
+      }
+
+      if (
+        isShift &&
+        (($el.is(this.options.checkboxes) &&
+          this.options.handleShiftForCheckbox) ||
+          (!$el.is(this.options.checkboxes) &&
+            !this.options.handleShiftForCheckbox))
+      ) {
+        handleShift.call(this, $, $el);
       }
     }
   };

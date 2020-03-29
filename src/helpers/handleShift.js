@@ -23,7 +23,6 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import toggle from "./toggle";
 import nextUntil from "./nextUntil";
 import prevUntil from "./prevUntil";
 
@@ -80,21 +79,11 @@ export default function handleShift($, $el) {
     prevUntilNextUntil[toCall]($el, $prevSelected, $itemsCheckboxes).each(
       function() {
         const $this = $(this);
-        toggle.call(self, $, $this, true);
+        self.toggle($, $this, true);
         if ($this.is(self.options.checkboxes)) {
-          toggle.call(
-            self,
-            $,
-            self.options.itemResolve.call(self, $this),
-            true
-          );
+          self.toggle($, self.options.itemResolve.call(self, $this), true);
         } else {
-          toggle.call(
-            self,
-            $,
-            self.options.checkboxResolve.call(self, $this),
-            true
-          );
+          self.toggle($, self.options.checkboxResolve.call(self, $this), true);
         }
       }
     );
@@ -151,17 +140,11 @@ export default function handleShift($, $el) {
         }
         $toDeselect.each(function() {
           const $this = $(this);
-          toggle.call(self, $, $this, false);
+          self.toggle($, $this, false);
           if ($this.is(self.options.checkboxes)) {
-            toggle.call(
-              self,
-              $,
-              self.options.itemResolve.call(self, $this),
-              false
-            );
+            self.toggle($, self.options.itemResolve.call(self, $this), false);
           } else {
-            toggle.call(
-              self,
+            self.toggle(
               $,
               self.options.checkboxResolve.call(self, $this),
               false
