@@ -23,7 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export default function checkUncheck($el, bool) {
+// eslint-disable-next-line no-unused-vars
+export default function checkUncheck($el, bool, instance) {
   $el.prop("checked", bool);
   $el.trigger("change");
   return;

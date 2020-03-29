@@ -97,11 +97,11 @@ export default ($, window, document) =>
     }
 
     uncheckAll() {
-      checkUncheck(this.$el, false);
+      checkUncheck(this.$el, false, this);
     }
 
     checkAll() {
-      checkUncheck(this.$el, true);
+      checkUncheck(this.$el, true, this);
     }
 
     destroy() {
