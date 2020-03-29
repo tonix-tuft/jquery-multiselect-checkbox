@@ -23,6 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export default function targetCheckStopPropagation(e) {
+// eslint-disable-next-line no-unused-vars
+export default function targetCheckStopPropagation(e, instance) {
   e.stopPropagation();
 }

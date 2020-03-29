@@ -149,7 +149,7 @@ export default ($, window, document) =>
         : this.options.itemResolve($this, this);
       const targetCheck = $target.is(this.options.checkboxes);
       if (targetCheck) {
-        this.options.targetCheckStopPropagation(e);
+        this.options.targetCheckStopPropagation(e, this);
       }
       const toToggle =
         targetCheck || isCtrl || isShift || this.options.syncEvenWithoutCtrl;
