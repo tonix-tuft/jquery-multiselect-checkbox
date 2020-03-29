@@ -104,7 +104,7 @@ export default function handleShift($, $el) {
       let indexOfNext = $itemsCheckboxes.index($el) + 1;
       let $next = $itemsCheckboxes.eq(indexOfNext);
       while ($next.length && indexOfNext <= $itemsCheckboxes.length - 1) {
-        if ($next.hasClass("jquery-multi-select-checkbox-checked")) {
+        if ($next.hasClass(self.options.checkedClassName)) {
           indexOfNext = $itemsCheckboxes.index($next) + 1;
           $next = $itemsCheckboxes.eq(indexOfNext);
         } else {
@@ -116,7 +116,7 @@ export default function handleShift($, $el) {
       let indexOfPrev = $itemsCheckboxes.index($el) - 1;
       let $prev = $itemsCheckboxes.eq(indexOfPrev);
       while ($prev.length && indexOfPrev >= 0) {
-        if ($prev.hasClass("jquery-multi-select-checkbox-checked")) {
+        if ($prev.hasClass(self.options.checkedClassName)) {
           indexOfPrev = $itemsCheckboxes.index($prev) - 1;
           $prev = $itemsCheckboxes.eq(indexOfPrev);
         } else {
