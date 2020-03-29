@@ -35,12 +35,7 @@ const JQUERY_PLUGIN_NAMESPACE = "multiselectCheckbox";
 /**
  * @type {Object}
  */
-const globalObject =
-  typeof window !== "undefined"
-    ? window
-    : typeof global !== "undefined"
-    ? global
-    : this;
+const globalObject = typeof global !== "undefined" ? global : window;
 
 /**
  * @type {jQuery|undefined}
