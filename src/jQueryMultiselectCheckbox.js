@@ -197,7 +197,7 @@ export default ($, window, document) =>
           $el.addClass(this.options.checkedClassName);
           if ($el.is(this.options.checkboxes)) {
             $el.prop("checked", true);
-            setSelectedUniqueId.call(this, $el);
+            setSelectedUniqueId($el, this);
           }
           this.$beforeLastSelected = this.$lastSelected;
           this.$lastSelected = $el;

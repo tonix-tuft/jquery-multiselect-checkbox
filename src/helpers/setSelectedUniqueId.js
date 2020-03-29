@@ -28,13 +28,14 @@
  */
 let itemIdCounter = 0;
 
-export default function setSelectedUniqueId($el) {
-  const idChecked = $el.data(this.options.checkedIdDataAttributeName);
-  if (this.selectedMap.get(idChecked)) {
-    this.selectedMap = this.selectedMap.unset(idChecked);
+export default function setSelectedUniqueId($el, instance) {
+  const self = instance;
+  const idChecked = $el.data(self.options.checkedIdDataAttributeName);
+  if (self.selectedMap.get(idChecked)) {
+    self.selectedMap = self.selectedMap.unset(idChecked);
   }
   itemIdCounter++;
   const itemId = itemIdCounter;
-  $el.data(this.options.checkedIdDataAttributeName, itemId);
-  this.selectedMap = this.selectedMap.set({ [itemId]: $el });
+  $el.data(self.options.checkedIdDataAttributeName, itemId);
+  self.selectedMap = self.selectedMap.set({ [itemId]: $el });
 }
