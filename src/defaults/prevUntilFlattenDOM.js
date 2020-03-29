@@ -24,7 +24,8 @@
  */
 
 export default $ =>
-  function prevUntilFlattenDOM($el, $prevSelected, $all) {
+  // eslint-disable-next-line no-unused-vars
+  function prevUntilFlattenDOM($el, $prevSelected, $all, instance) {
     let $ret = $([]);
     let prevSelectedFound = false;
     $all.each(function() {

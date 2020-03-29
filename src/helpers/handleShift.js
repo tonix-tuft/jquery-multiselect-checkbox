@@ -73,7 +73,7 @@ export default function handleShift($, $el) {
       toCall = "prev";
     }
 
-    prevUntilNextUntil[toCall]($el, $prevSelected, $itemsCheckboxes).each(
+    prevUntilNextUntil[toCall]($el, $prevSelected, $itemsCheckboxes, self).each(
       function() {
         const $this = $(this);
         self.toggle($, $this, true);

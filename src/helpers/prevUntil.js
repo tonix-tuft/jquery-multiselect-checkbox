@@ -24,6 +24,6 @@
  */
 
 // eslint-disable-next-line no-unused-vars
-export default function prevUntil($el, $prevSelected, $all) {
+export default function prevUntil($el, $prevSelected, $all, instance) {
   return $el.prevUntil($prevSelected);
 }
