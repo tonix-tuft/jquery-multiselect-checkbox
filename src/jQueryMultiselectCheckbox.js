@@ -157,7 +157,7 @@ export default ($, window, document) =>
         this.toggle($, $checkbox, void 0);
         this.toggle($, $item, void 0, isShift);
       }
-      checkForCheckboxAll.call(this, $, toToggle);
+      checkForCheckboxAll($, toToggle, this);
     }
 
     // eslint-disable-next-line no-unused-vars

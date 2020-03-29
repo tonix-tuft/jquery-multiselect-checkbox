@@ -23,10 +23,11 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export default function checkForCheckboxAll($, toggled) {
+export default function checkForCheckboxAll($, toggled, instance) {
   let allTrue = true;
   let allFalse = true;
-  $(this.options.checkboxes).each(function() {
+  const self = instance;
+  $(self.options.checkboxes).each(function() {
     const checked = $(this).prop("checked");
     if (!checked) {
       allTrue = false;
@@ -34,15 +35,15 @@ export default function checkForCheckboxAll($, toggled) {
       allFalse = false;
     }
   });
-  this.$el.prop("checked", allTrue);
+  self.$el.prop("checked", allTrue);
   if (toggled) {
     if (allTrue) {
-      this.options.onAllChecked();
+      self.options.onAllChecked();
     } else {
       if (allFalse) {
-        this.options.onAllUnchecked();
+        self.options.onAllUnchecked();
       } else {
-        this.options.onNotAllChecked();
+        self.options.onNotAllChecked();
       }
     }
   }
