@@ -26,8 +26,8 @@
 import nextUntil from "./nextUntil";
 import prevUntil from "./prevUntil";
 
-export default function handleShift($, $el) {
-  const self = this;
+export default function handleShift($, $el, instance) {
+  const self = instance;
   const prevUntilNextUntil = {
     prev: self.options.prev,
     next: self.options.next

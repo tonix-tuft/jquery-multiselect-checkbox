@@ -211,7 +211,7 @@ export default ($, window, document) =>
           (!$el.is(this.options.checkboxes) &&
             !this.options.handleShiftForCheckbox))
       ) {
-        handleShift.call(this, $, $el);
+        handleShift($, $el, this);
       }
     }
   };
