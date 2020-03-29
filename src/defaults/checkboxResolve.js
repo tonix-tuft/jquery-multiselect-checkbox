@@ -24,8 +24,8 @@
  */
 
 export default $ =>
-  function checkboxResolve($item) {
-    const self = this;
+  function checkboxResolve($item, instance) {
+    const self = instance;
     return $item.find("*").filter(function() {
       return $(this).is(self.options.checkboxes);
     });

@@ -143,7 +143,7 @@ export default ($, window, document) =>
       const $target = $(e.target);
       const $checkbox = $this.is(this.options.checkboxes)
         ? $this
-        : this.options.checkboxResolve.call(this, $this);
+        : this.options.checkboxResolve($this, this);
       const $item = $this.is(this.options.sync)
         ? $this
         : this.options.itemResolve.call(this, $this);
