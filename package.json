@@ -10,7 +10,7 @@
     "jquery-plugin",
     "ecosystem:jquery"
   ],
-  "author": "Anton Bagdatyev (Tonix-Tuft)",
+  "author": "Anton Bagdatyev (Tonix)",
   "license": "MIT",
   "main": "dist/jquery-multiselect-checkbox.js",
   "module": "dist/es6/index.js",
