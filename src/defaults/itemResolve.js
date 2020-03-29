@@ -23,6 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export default function itemResolve($checkbox) {
-  return $checkbox.closest(this.options.sync);
+export default function itemResolve($checkbox, instance) {
+  const self = instance;
+  return $checkbox.closest(self.options.sync);
 }

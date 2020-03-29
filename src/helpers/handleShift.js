@@ -58,10 +58,7 @@ export default function handleShift($, $el) {
       ? ($el.is(self.options.sync)
           ? ($el = self.options.checkboxResolve($el, self)) && void 0
           : void 0) || itemsSelected[itemsSelected.length - 2]
-      : self.options.itemResolve.call(
-          self,
-          itemsSelected[itemsSelected.length - 2]
-        );
+      : self.options.itemResolve(itemsSelected[itemsSelected.length - 2], self);
 
     const prevIndex = $itemsCheckboxes.index($prevSelected),
       itemIndex = $itemsCheckboxes.index($el);
@@ -81,7 +78,7 @@ export default function handleShift($, $el) {
         const $this = $(this);
         self.toggle($, $this, true);
         if ($this.is(self.options.checkboxes)) {
-          self.toggle($, self.options.itemResolve.call(self, $this), true);
+          self.toggle($, self.options.itemResolve($this, self), true);
         } else {
           self.toggle($, self.options.checkboxResolve($this, self), true);
         }
@@ -123,7 +120,7 @@ export default function handleShift($, $el) {
       self.options.usePrevUntilNextUntilForSync &&
       $el.is(self.options.checkboxes)
     ) {
-      $el = self.options.itemResolve.call(self, $el);
+      $el = self.options.itemResolve($el, self);
     }
     const index = $itemsCheckboxes.index($el);
     for (let i = 0; i < self.selectedRanges.length; i++) {
@@ -142,7 +139,7 @@ export default function handleShift($, $el) {
           const $this = $(this);
           self.toggle($, $this, false);
           if ($this.is(self.options.checkboxes)) {
-            self.toggle($, self.options.itemResolve.call(self, $this), false);
+            self.toggle($, self.options.itemResolve($this, self), false);
           } else {
             self.toggle($, self.options.checkboxResolve($this, self), false);
           }

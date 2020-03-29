@@ -146,7 +146,7 @@ export default ($, window, document) =>
         : this.options.checkboxResolve($this, this);
       const $item = $this.is(this.options.sync)
         ? $this
-        : this.options.itemResolve.call(this, $this);
+        : this.options.itemResolve($this, this);
       const targetCheck = $target.is(this.options.checkboxes);
       if (targetCheck) {
         this.options.targetCheckStopPropagation(e);
