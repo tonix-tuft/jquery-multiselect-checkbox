@@ -49,5 +49,6 @@ export default ($, window, document) => ({
   next: nextUntilFlattenDOM,
   prev: prevUntilFlattenDOM,
   checkedClassName: "jquery-multi-select-checkbox-checked",
-  checkedIdDataAttributeName: "jquery-multi-select-checkbox-checked-id"
+  checkedKeyDataAttributeName: "jquery-multi-select-checkbox-checked-key",
+  keyDataAttributeName: "key"
 });

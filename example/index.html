@@ -474,14 +474,14 @@
       $(".select-all-checkbox").multiselectCheckbox({
         checkboxes: ".table .select-checkbox",
         sync: ".table .row",
-        onNotAllChecked: function() {
-          console.log("Not all checked");
+        onNotAllChecked: function(selectedMap) {
+          console.log("Not all checked", selectedMap.orderedByI());
         },
-        onAllChecked: function() {
-          console.log("All checked");
+        onAllChecked: function(selectedMap) {
+          console.log("All checked", selectedMap.orderedByI());
         },
-        onAllUnchecked: function() {
-          console.log("All unchecked");
+        onAllUnchecked: function(selectedMap) {
+          console.log("All unchecked", selectedMap.orderedByI());
         }
       });
     </script>

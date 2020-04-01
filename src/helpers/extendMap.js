@@ -23,19 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/**
- * @type {number}
- */
-let itemIdCounter = 0;
-
-export default function setSelectedUniqueId($el, instance) {
-  const self = instance;
-  const idChecked = $el.data(self.options.checkedIdDataAttributeName);
-  if (self.selectedMap.get(idChecked)) {
-    self.selectedMap = self.selectedMap.unset(idChecked);
-  }
-  itemIdCounter++;
-  const itemId = itemIdCounter;
-  $el.data(self.options.checkedIdDataAttributeName, itemId);
-  self.selectedMap = self.selectedMap.set({ [itemId]: $el });
+export default function extendMap(map) {
+  map.orderedByI = (desc = false) =>
+    map.values().sort((a, b) => (!desc ? a.i - b.i : b.i - a.i));
+  return map;
 }

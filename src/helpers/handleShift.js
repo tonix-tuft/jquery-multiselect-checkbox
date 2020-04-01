@@ -57,8 +57,11 @@ export default function handleShift($, $el, instance) {
     const $prevSelected = !self.options.usePrevUntilNextUntilForSync
       ? ($el.is(self.options.sync)
           ? ($el = self.options.checkboxResolve($el, self)) && void 0
-          : void 0) || itemsSelected[itemsSelected.length - 2]
-      : self.options.itemResolve(itemsSelected[itemsSelected.length - 2], self);
+          : void 0) || itemsSelected[itemsSelected.length - 2].$el
+      : self.options.itemResolve(
+          itemsSelected[itemsSelected.length - 2].$el,
+          self
+        );
 
     const prevIndex = $itemsCheckboxes.index($prevSelected),
       itemIndex = $itemsCheckboxes.index($el);

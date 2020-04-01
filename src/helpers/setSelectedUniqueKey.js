@@ -23,28 +23,29 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export default function checkForCheckboxAll($, toggled, instance) {
-  let allTrue = true;
-  let allFalse = true;
+import extendMap from "./extendMap";
+
+/**
+ * @type {number}
+ */
+let itemIdCounter = 0;
+
+export default function setSelectedUniqueKey($el, instance) {
   const self = instance;
-  $(self.options.checkboxes).each(function() {
-    const checked = $(this).prop("checked");
-    if (!checked) {
-      allTrue = false;
-    } else {
-      allFalse = false;
+  const checkedKey = $el.data(self.options.checkedKeyDataAttributeName);
+  if (self.selectedMap.get(checkedKey)) {
+    self.selectedMap = extendMap(self.selectedMap.unset(checkedKey));
+  }
+  const key = $el.data(self.options.keyDataAttributeName) || ++itemIdCounter;
+  $el.data(self.options.checkedKeyDataAttributeName, key);
+  const value = $el.val();
+  const newMap = self.selectedMap.set({
+    [key]: {
+      $el,
+      key,
+      value: value || void 0,
+      i: $el.index(self.options.checkboxes)
     }
   });
-  self.$el.prop("checked", allTrue);
-  if (toggled) {
-    if (allTrue) {
-      self.options.onAllChecked(self.selectedMap);
-    } else {
-      if (allFalse) {
-        self.options.onAllUnchecked(self.selectedMap);
-      } else {
-        self.options.onNotAllChecked(self.selectedMap);
-      }
-    }
-  }
+  self.selectedMap = extendMap(newMap);
 }

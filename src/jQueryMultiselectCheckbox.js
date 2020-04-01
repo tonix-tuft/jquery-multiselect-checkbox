@@ -28,7 +28,8 @@ import checkUncheck from "./helpers/checkUncheck";
 import emptyArrayIfNull from "./helpers/emptyArrayIfNull";
 import checkForCheckboxAll from "./helpers/checkForCheckboxAll";
 import handleShift from "./helpers/handleShift";
-import setSelectedUniqueId from "./helpers/setSelectedUniqueId";
+import setSelectedUniqueKey from "./helpers/setSelectedUniqueKey";
+import extendMap from "./helpers/extendMap";
 
 // eslint-disable-next-line no-unused-vars
 export default ($, window, document) =>
@@ -37,9 +38,11 @@ export default ($, window, document) =>
     constructor(element, options) {
       this.$el = $(element);
       this.options = options;
-      this.selectedMap = new ImmutableLinkedOrderedMap({
-        mode: ImmutableLinkedOrderedMap.MODE.LIGHTWEIGHT
-      });
+      this.selectedMap = extendMap(
+        new ImmutableLinkedOrderedMap({
+          mode: ImmutableLinkedOrderedMap.MODE.LIGHTWEIGHT
+        })
+      );
       this.selectedRanges = [];
       this.$lastSelected = void 0;
       this.$beforeLastSelected = void 0;
@@ -189,11 +192,11 @@ export default ($, window, document) =>
       });
 
       if (!checked) {
-        this.selectedMap = this.selectedMap.empty();
+        this.selectedMap = extendMap(this.selectedMap.empty());
         this.selectedRanges = [];
-        this.options.onAllUnchecked();
+        this.options.onAllUnchecked(this.selectedMap);
       } else {
-        this.options.onAllChecked();
+        this.options.onAllChecked(this.selectedMap);
       }
     }
 
@@ -203,9 +206,11 @@ export default ($, window, document) =>
           $el.removeClass(this.options.checkedClassName);
           if ($el.is(this.options.checkboxes)) {
             $el.prop("checked", false);
-            const itemId = $el.data(this.options.checkedIdDataAttributeName);
-            if (this.selectedMap.get(itemId)) {
-              this.selectedMap = this.selectedMap.unset(itemId);
+            const checkedKey = $el.data(
+              this.options.checkedKeyDataAttributeName
+            );
+            if (this.selectedMap.get(checkedKey)) {
+              this.selectedMap = extendMap(this.selectedMap.unset(checkedKey));
             }
           }
         }
@@ -214,7 +219,7 @@ export default ($, window, document) =>
           $el.addClass(this.options.checkedClassName);
           if ($el.is(this.options.checkboxes)) {
             $el.prop("checked", true);
-            setSelectedUniqueId($el, this);
+            setSelectedUniqueKey($el, this);
           }
           this.$beforeLastSelected = this.$lastSelected;
           this.$lastSelected = $el;
