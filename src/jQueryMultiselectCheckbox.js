@@ -50,6 +50,7 @@ export default ($, window, document) =>
       this.options.checkboxes = emptyArrayIfNull(this.options.checkboxes);
       this.options.sync = emptyArrayIfNull(this.options.sync);
       this.initListeners();
+      this.initState();
     }
 
     initListeners() {
@@ -94,6 +95,22 @@ export default ($, window, document) =>
           e.preventDefault();
         }
       });
+    }
+
+    initState() {
+      if (this.$el.prop("checked")) {
+        this.checkAll();
+      } else {
+        const $checkboxes = $(this.options.checkboxes);
+        const $checked = $checkboxes.filter(":checked");
+        if ($checkboxes.length === $checked.length) {
+          this.checkAll();
+        } else if ($checked.length) {
+          $checked.each(function() {
+            $(this).click();
+          });
+        }
+      }
     }
 
     uncheckAll() {
