@@ -36,31 +36,31 @@
     "jquery": "^3.4.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
-    "@babel/preset-env": "^7.9.5",
-    "@types/jquery": "^3.3.34",
-    "@typescript-eslint/eslint-plugin": "^2.27.0",
-    "@typescript-eslint/parser": "^2.27.0",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.0",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@types/jquery": "^3.5.1",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
     "babel-loader": "^8.1.0",
     "eslint": "^6.8.0",
     "eslint-loader": "^3.0.4",
-    "jquery": "^3.5.0",
+    "jquery": "^3.5.1",
     "minimist": ">=1.2.2",
     "serialize-javascript": "^2.1.2",
-    "terser-webpack-plugin": "^1.4.3",
-    "typescript": "^3.8.3",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "terser-webpack-plugin": "^1.4.4",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
   "bugs": {
     "url": "https://github.com/tonix-tuft/jquery-multiselect-checkbox/issues"
   },
   "homepage": "https://github.com/tonix-tuft/jquery-multiselect-checkbox#readme",
   "dependencies": {
-    "immutable-linked-ordered-map": "^1.7.0"
+    "immutable-linked-ordered-map": "^1.17.0"
   },
   "files": [
     "dist",
