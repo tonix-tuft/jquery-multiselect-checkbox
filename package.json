@@ -1,6 +1,6 @@
 {
   "name": "jquery-multiselect-checkbox",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "A jQuery plugin which enables multiple selection for checkbox inputs as well as other DOM elements.",
   "keywords": [
     "jquery",
