@@ -20,10 +20,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "WEBPACK_ENV=watch webpack --progress --colors --watch",
+    "watch": "WEBPACK_ENV=watch webpack --progress --color --watch",
     "mkdir-build": "mkdir -p ./dist/es6",
     "clear-build": "find ./dist ! -name '.gitignore' -type f -exec rm -f {} +",
-    "dev-build": "WEBPACK_ENV=watch webpack --progress --colors",
+    "dev-build": "WEBPACK_ENV=watch webpack --progress --color",
     "build": "WEBPACK_ENV=build webpack",
     "publish-git": "npm publish && git push && git push --tags",
     "build-all": "npm run mkdir-build && npm run clear-build && npm run build && npm run dev-build && npm run build-module",
@@ -47,14 +47,14 @@
     "babel-loader": "^8.1.0",
     "eslint": "^6.8.0",
     "eslint-loader": "^3.0.4",
+    "glob-parent": ">=5.1.2",
     "jquery": "^3.5.1",
     "minimist": ">=1.2.2",
     "serialize-javascript": "^3.1.0",
     "terser-webpack-plugin": "^3.1.0",
     "typescript": "^3.9.7",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "glob-parent": ">=5.1.2"
+    "webpack": "^5.39.0",
+    "webpack-cli": "^4.7.2"
   },
   "bugs": {
     "url": "https://github.com/tonix-tuft/jquery-multiselect-checkbox/issues"

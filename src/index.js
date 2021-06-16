@@ -83,7 +83,7 @@ export default function initPlugin($) {
           $,
           globalObject,
           globalObject.document
-        )
+        ),
       };
   const { defaultOptions, jQueryMultiselectCheckbox } = pluginIDMap[pluginID];
   $.fn.multiselectCheckbox = function multiselectCheckbox(option, ...args) {
